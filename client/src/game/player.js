@@ -16,24 +16,31 @@ class Player {
     // Начальная позиция
     this.elem.style.left = this.areaRect.left + Math.floor(this.areaRect.width / 2) + 'px'
     this.lastAttack = 0
+
+    this.direction = null
   }
   moveLeft() {
     this.elemRect = this.elem.getBoundingClientRect()
-    if (this.elemRect.left <= this.areaRect.left) {
-        this.elem.style.left = this.areaRect.left + 'px'
-    }
-    else {
-        this.elem.style.left = this.elemRect.left - this.speed + 'px'
+    if (this.elemRect.left >= this.areaRect.left) {
+        this.direction = 'left'
     }
   }
   moveRight() {
     this.elemRect = this.elem.getBoundingClientRect()
-    console.log(this.areaRect.right)
-    console.log(this.elemRect.right)
-    if (this.elemRect.right >= this.areaRect.right) {
-        this.elem.style.left = this.areaRect.right - this.elemRect.width + 'px'
+    if (this.elemRect.right <= this.areaRect.right) {
+        this.direction = 'right'
     }
-    else {
+  }
+  stop() {
+      this.direction = null
+  }
+  update() {
+    this.elemRect = this.elem.getBoundingClientRect()
+    
+    if (this.direction == 'left' && this.elemRect.left > this.areaRect.left) {
+        this.elem.style.left = this.elemRect.left - this.speed + 'px'
+    }
+    else if (this.direction == 'right' && this.elemRect.right < this.areaRect.right) {
         this.elem.style.left = this.elemRect.left + this.speed + 'px'
     }
   }
@@ -43,8 +50,8 @@ class Player {
     // if (now - this.lastAttack > 1000) {
         
     // }
-    new Bullet(this.elemRect.x + this.elemRect.width / 2, this.elemRect.y, target_x, target_y)
-        this.lastAttack = now
+    this.addBullet(new Bullet(this.elemRect.x + this.elemRect.width / 2, this.elemRect.y, target_x, target_y))
+    this.lastAttack = now
   }
 }
 export default Player;

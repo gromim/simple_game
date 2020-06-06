@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <div id="game-area" class="game-area" @click="click">
-      <div ref="enemy" class="enemy">100</div>
     </div>
     <Header />
   </div>
@@ -27,7 +26,8 @@ export default {
 		let enemy = new Enemy(this.$refs.enemy)
 		this.game = new Game(player, enemy)
     document.addEventListener('keydown', e => this.game.keydown(e))
-    // this.$refs.area.addEventListener('mousedown', this.click)
+    document.addEventListener('keyup', e => this.game.keyup(e))
+    this.game.start()
 	},
 	methods: {
 		connect() {
@@ -56,6 +56,7 @@ export default {
     z-index: 1000;
   }
   .enemy {
+    position: absolute;
     width: 100px;
     height: 25px;
     line-height: 25px;
