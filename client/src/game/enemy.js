@@ -13,9 +13,7 @@ class Enemy{
         this.elem.style.left = this.areaRect.left + Math.floor(this.areaRect.width / 2) + 'px'
 
         this.speed = 5
-        //this.direction = Math.random() > 0.5 ? 'right' : 'left'
-        this.direction = 'right'
-    
+        this.direction = Math.random() > 0.5 ? 'right' : 'left'
     }
     update() {
         this.elemRect = this.elem.getBoundingClientRect()
