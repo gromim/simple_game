@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <div ref='area' class="game-area">
+    <div id="game-area" class="game-area">
       <div ref="enemy" class="enemy"></div>
-      <div ref="player" class="player"></div>
     </div>
     
     <button @click="connect">Коннект</button>
@@ -23,10 +22,11 @@ export default {
       game: null
     }
   },
-  created() {
-    let player = new Player(this.$refs.player, document)
+  mounted() {
+    let player = new Player()
     let enemy = new Enemy(this.$refs.enemy)
     this.game = new Game(player, enemy)
+    document.addEventListener('keydown', e => this.game.keydown(e))
   },
   methods: {
     connect() {
@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style lang="scss">
-
-
+.player {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+}
 </style>
