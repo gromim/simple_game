@@ -5,14 +5,13 @@ class Game {
     this.player = player;
     this.enemy = enemy;
   }
-  keydown(e) {
-    if (e.key == "ArrowLeft") {
-      this.player.moveLeft();
-    } else if (e.key == "ArrowRight") {
-      this.player.moveRight();
-    } else if (e.key == "ArrowUp") {
-      this.player.attack();
+  keydown({key}) {
+    const keys = {
+      'ArrowLeft': this.player.moveLeft,
+      'ArrowRight': this.player.moveRight,
+      'ArrowUp': this.player.attack,
     }
+    if (keys[key]) keys[key].call(this.player)
   }
 }
 

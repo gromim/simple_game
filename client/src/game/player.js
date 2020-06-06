@@ -5,7 +5,7 @@ class Player {
     this.area = document.getElementById('game-area')
     this.elem = document.createElement('div')
     this.elem.classList.add('player')
-    this.area.appendChild(this.elem)
+    this.area.append(this.elem)
     // Получение начальных размеров и позиций
     this.areaRect = this.area.getBoundingClientRect()
     this.elemRect = this.elem.getBoundingClientRect();
