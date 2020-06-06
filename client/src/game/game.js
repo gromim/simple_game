@@ -5,6 +5,7 @@ class Game{
         this.player =player
         this.enemy = enemy
     }
+
     
 }
 
