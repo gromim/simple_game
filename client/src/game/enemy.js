@@ -1,8 +1,11 @@
 class Enemy{
     // Класс врага
     // elem - ref из vue, чтобы взимодействовать отсюда
-    constructor(elem) {
-        this.elem = elem
+    constructor() {
+        this.area = document.getElementById('game-area')
+        this.elem = document.createElement('div')
+        this.elem.classList.add('bullet')
+        this.area.appendChild(this.elem)
     }
 }
 export default Enemy

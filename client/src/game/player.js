@@ -1,3 +1,5 @@
+import Bullet from "./bullet"
+
 class Player {
   // Класс игрока
   constructor() {
@@ -13,6 +15,7 @@ class Player {
     this.speed = 5
     // Начальная позиция
     this.elem.style.left = this.areaRect.left + Math.floor(this.areaRect.width / 2) + 'px'
+    this.lastAttack = 0
   }
   moveLeft() {
     this.elemRect = this.elem.getBoundingClientRect()
@@ -25,13 +28,23 @@ class Player {
   }
   moveRight() {
     this.elemRect = this.elem.getBoundingClientRect()
+    console.log(this.areaRect.right)
+    console.log(this.elemRect.right)
     if (this.elemRect.right >= this.areaRect.right) {
-        this.elem.style.left = this.areaRect.right + 'px'
+        this.elem.style.left = this.areaRect.right - this.elemRect.width + 'px'
     }
     else {
         this.elem.style.left = this.elemRect.left + this.speed + 'px'
     }
   }
-  attack() {}
+  attack(target_x, target_y) {
+    
+    let now = new Date().getTime()
+    // if (now - this.lastAttack > 1000) {
+        
+    // }
+    new Bullet(this.elemRect.x + this.elemRect.width / 2, this.elemRect.y, target_x, target_y)
+        this.lastAttack = now
+  }
 }
 export default Player;

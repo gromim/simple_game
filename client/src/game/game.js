@@ -9,9 +9,11 @@ class Game {
     const keys = {
       'ArrowLeft': this.player.moveLeft,
       'ArrowRight': this.player.moveRight,
-      'ArrowUp': this.player.attack,
     }
     if (keys[key]) keys[key].call(this.player)
+  }
+  click(e) {
+      this.player.attack(e.x, e.y)
   }
 }
 

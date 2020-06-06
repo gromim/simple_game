@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div id="game-area" class="game-area">
+    <div id="game-area" class="game-area" @click="click">
       <div ref="enemy" class="enemy">100</div>
     </div>
     <Header />
@@ -26,12 +26,16 @@ export default {
 		let player = new Player()
 		let enemy = new Enemy(this.$refs.enemy)
 		this.game = new Game(player, enemy)
-		document.addEventListener('keydown', e => this.game.keydown(e))
+    document.addEventListener('keydown', e => this.game.keydown(e))
+    // this.$refs.area.addEventListener('mousedown', this.click)
 	},
 	methods: {
 		connect() {
 			ws.open()
-		},
+    },
+    click(e) {
+      this.game.click(e)
+    }
 	}
 }
 </script>
@@ -58,5 +62,12 @@ export default {
     background: #e74c3c;
     color: #fff;
     text-align: center;
+  }
+  .bullet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
   }
 </style>
