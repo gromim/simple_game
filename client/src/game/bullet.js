@@ -36,18 +36,29 @@ class Bullet {
 
     // Определяет пересечение пули и врага
     isIntersection(rect) {
-        const minX = this.elemRect.x
-        const maxX = minX + this.elemRect.width
-        const enemyStartX = rect.x
-        const enemyEndX = enemyStartX + rect.width
+        // const minX = this.elemRect.x
+        // const maxX = minX + this.elemRect.width
+        // const enemyStartX = rect.x
+        // const enemyEndX = enemyStartX + rect.width
+        this.elemRect = this.elem.getBoundingClientRect()
 
-        return ((minX > enemyStartX && maxX < enemyEndX) ||
-          (minX < enemyStartX && maxX > enemyStartX) ||
-          (minX < enemyEndX && maxX > enemyEndX)
-        ) && this.elemRect.y <= rect.y + rect.height
+        // console.log(this.elemRect.top < rect.bottom && (
+        //     this.elemRect.right >= rect.left && this.elemRect.right <= rect.right ||
+        //     this.elemRect.left >= rect.left && this.elemRect.right <= rect.right
+        // ))
+        return (this.elemRect.top <= rect.bottom && this.elemRect.bottom >= rect.top) && (
+            this.elemRect.right >= rect.left && this.elemRect.right <= rect.right ||
+            this.elemRect.left >= rect.left && this.elemRect.right <= rect.right
+        )
+
+        // return ((minX > enemyStartX && maxX < enemyEndX) ||
+        //   (minX < enemyStartX && maxX > enemyStartX) ||
+        //   (minX < enemyEndX && maxX > enemyEndX)
+        // ) && this.elemRect.y <= rect.y + rect.height
     }
 
     needDestroy(enemy) {
+        console.log(this.isIntersection(enemy.elemRect))
         if (this.isIntersection(enemy.elemRect)) {
             enemy.attacked()
             return true
