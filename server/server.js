@@ -19,7 +19,7 @@ ws.on('connection', ws => {
     new_user_info()
     ws.user = new game.User(ws)
     ws.user.game = rooms.join(ws.user)
-    
+
     if (ws.user.game.users.length > 1) {
         ws.user.game.sendOther(ws.user, {type: 'join', id: ws.user.id})
     }
@@ -28,6 +28,9 @@ ws.on('connection', ws => {
         console.log('User ID', ws.user.id)
         console.log('MESSAGE', message)
         
+    })
+    ws.on('close', error => {
+        console.log('User disconnected')
     })
     ws.send(JSON.stringify({data: 'hello'}))
 })
