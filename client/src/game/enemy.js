@@ -18,7 +18,7 @@ class Enemy{
     update() {
         this.elem.innerText = this.hp
         this.elemRect = this.elem.getBoundingClientRect()
-        // console.log(this.elemRect.x)
+
         if (this.direction == 'left') {
             if (this.elemRect.left > this.areaRect.left) {
                 this.elem.style.left = this.elemRect.left - this.speed + 'px'
