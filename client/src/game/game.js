@@ -1,11 +1,11 @@
 import ws from '@/plugins/connect'
+import Enemy from './enemy'
 
 class Game {
   // Класс игры
   // Тут основная логика игры
-  constructor(player, enemy) {
+  constructor(player) {
     this.player = player;
-    this.enemy = enemy;
     this.loopInterval = null
     this.bullets = []
     this.player.addBullet = (bullet) => this.addBullet(bullet)
@@ -48,6 +48,9 @@ class Game {
       })
       if (this.enemy.needDestroy()) {
         this.removeEnemy(this.enemy)
+        if (this.enemy.isDestroyed) {
+          this.spawnEnemy()
+        }
       }
     }
   addBullet(bullet) {
@@ -59,6 +62,9 @@ class Game {
   }
   removeEnemy(enemy) {
       enemy.destroy()
+  }
+  spawnEnemy() {
+    this.enemy = new Enemy()
   }
 }
 

@@ -17,7 +17,6 @@ import Header from './Header'
 import ws from '@/plugins/connect'
 import Game from '@/game/game'
 import Player from '@/game/player'
-import Enemy from '@/game/enemy'
 
 export default {
   name: "Game",
@@ -30,8 +29,8 @@ export default {
 	},
 	mounted() {
 		let player = new Player()
-		let enemy = new Enemy(this.$refs.enemy)
-		this.game = new Game(player, enemy)
+		this.game = new Game(player)
+    this.game.spawnEnemy()
     document.addEventListener('keydown', e => this.game.keydown(e))
     document.addEventListener('keyup', e => this.game.keyup(e))
 
