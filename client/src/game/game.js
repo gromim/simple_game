@@ -39,8 +39,7 @@ class Game {
       this.enemy.update()
       this.bullets.forEach(bullet => {
         bullet.update();
-        console.log(bullet.needDestroy())
-        if (bullet.needDestroy()) {
+        if (bullet.needDestroy(this.enemy)) {
             this.removeBullet(bullet);
         }
       })

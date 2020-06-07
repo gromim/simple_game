@@ -4,7 +4,7 @@ class Enemy{
     constructor() {
         this.area = document.getElementById('game-area')
         this.elem = document.createElement('div')
-        this.elem.innerText = 100
+        this.hp = 100
         this.elem.classList.add('enemy')
         this.area.appendChild(this.elem)
 
@@ -16,8 +16,9 @@ class Enemy{
         this.direction = Math.random() > 0.5 ? 'right' : 'left'
     }
     update() {
+        this.elem.innerText = this.hp
         this.elemRect = this.elem.getBoundingClientRect()
-        
+        // console.log(this.elemRect.x)
         if (this.direction == 'left') {
             if (this.elemRect.left > this.areaRect.left) {
                 this.elem.style.left = this.elemRect.left - this.speed + 'px'
@@ -32,6 +33,9 @@ class Enemy{
                 this.direction = 'left'
             }
         }
+    }
+    attacked() {
+        this.hp -= 1
     }
 }
 export default Enemy
