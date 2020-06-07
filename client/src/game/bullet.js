@@ -33,38 +33,37 @@ class Bullet {
         this.elem.style.left = this.elemRect.left + this.speed_x + 'px'
         this.elem.style.top = this.elemRect.top + this.speed_y + 'px'
     }
+
+    // Определяет пересечение пули и врага
+    isIntersection(rect) {
+        const minX = this.elemRect.x
+        const maxX = minX + this.elemRect.width
+        const enemyStartX = rect.x
+        const enemyEndX = enemyStartX + rect.width
+
+        return ((minX > enemyStartX && maxX < enemyEndX) ||
+          (minX < enemyStartX && maxX > enemyStartX) ||
+          (minX < enemyEndX && maxX > enemyEndX)
+        ) && this.elemRect.y <= rect.y + rect.height
+    }
+
     needDestroy(enemy) {
-        return isIntersection.call(this, enemy) || isOutView.call(this)
+        if (this.isIntersection(enemy.elemRect)) {
+            enemy.attacked()
+            return true
+        }
+        return !this.isIntersection(this.areaRect)
     }
 }
-
-// Определяет пересечение пули и врага
-function isIntersection(enemy) {
-    const minX = this.elemRect.x
-    const maxX = minX + this.elemRect.width
-    const enemyStartX = enemy.elemRect.x
-    const enemyEndX = enemyStartX + enemy.elemRect.width
-
-    if (((minX > enemyStartX && maxX < enemyEndX) ||
-      (minX < enemyStartX && maxX > enemyStartX) ||
-      (minX < enemyEndX && maxX > enemyEndX)
-    ) && this.elemRect.y <= enemy.elemRect.y + enemy.elemRect.height) {
-        enemy.attacked()
-        return true
-    }
-    return false
-}
-
-// Определяет вышла ли пуля за экран
-function isOutView() {
-    if (this.elemRect.x < this.areaRect.x ||
-      this.elemRect.x + this.elemRect.width > this.areaRect.x + this.areaRect.width ||
-      this.elemRect.y < this.areaRect.y ||
-      this.elemRect.y + this.elemRect.height > this.areaRect.y + this.areaRect.height
-    ) {
-        console.log('DESTROY')
-        return true
-    }
-}
-
+// // Определяет вышла ли пуля за экран
+// function isOutView() {
+//     if (this.elemRect.x < this.areaRect.x ||
+//       this.elemRect.x + this.elemRect.width > this.areaRect.x + this.areaRect.width ||
+//       this.elemRect.y < this.areaRect.y ||
+//       this.elemRect.y + this.elemRect.height > this.areaRect.y + this.areaRect.height
+//     ) {
+//         console.log('DESTROY')
+//         return true
+//     }
+// }
 export default Bullet
