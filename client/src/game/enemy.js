@@ -4,7 +4,7 @@ class Enemy{
     constructor() {
         this.area = document.getElementById('game-area')
         this.elem = document.createElement('div')
-        this.hp = 10
+        this.hp = Math.round(5 - 0.5 + Math.random() * (20 - 5 + 1))
         this.elem.classList.add('enemy')
         this.area.appendChild(this.elem)
 
