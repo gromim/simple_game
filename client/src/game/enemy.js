@@ -4,7 +4,7 @@ class Enemy{
     constructor() {
         this.area = document.getElementById('game-area')
         this.elem = document.createElement('div')
-        this.hp = 100
+        this.hp = 10
         this.elem.classList.add('enemy')
         this.area.appendChild(this.elem)
 
@@ -36,6 +36,12 @@ class Enemy{
     }
     attacked() {
         this.hp -= 1
+    }
+    destroy() {
+        this.area.removeChild(this.elem)
+    }
+    needDestroy() {
+        return this.hp <= 0
     }
 }
 export default Enemy

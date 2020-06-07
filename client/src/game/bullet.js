@@ -25,7 +25,6 @@ class Bullet {
         this.elemRect = this.elem.getBoundingClientRect()
     }
     destroy() {
-        clearInterval(this.interval)
         this.area.removeChild(this.elem)
     }
     update() {
@@ -35,6 +34,7 @@ class Bullet {
         this.elem.style.top = this.elemRect.top + this.speed_y + 'px'
     }
     needDestroy(enemy) {
+        // Определяет пересечение пули и врага
         const minX = this.elemRect.x
         const maxX = minX + this.elemRect.width
         const enemyStartX = enemy.elemRect.x
@@ -47,7 +47,7 @@ class Bullet {
             enemy.attacked()
             return true
         }
-
+        // Определяет вышла ли пуля за экран
         if (this.elemRect.x < this.areaRect.x ||
             this.elemRect.x + this.elemRect.width > this.areaRect.x + this.areaRect.width ||
             this.elemRect.y < this.areaRect.y ||
@@ -57,7 +57,6 @@ class Bullet {
             return true
         }
         return false
-        
     }
 }
 export default Bullet

@@ -43,6 +43,9 @@ class Game {
             this.removeBullet(bullet);
         }
       })
+      if (this.enemy.needDestroy()) {
+        this.removeEnemy(this.enemy)
+      }
     }
   addBullet(bullet) {
       this.bullets.push(bullet)
@@ -50,6 +53,9 @@ class Game {
   removeBullet(bullet) {
       this.bullets.splice(this.bullets.indexOf(bullet), 1)
       bullet.destroy()
+  }
+  removeEnemy(enemy) {
+      enemy.destroy()
   }
 }
 
