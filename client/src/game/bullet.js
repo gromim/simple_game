@@ -58,7 +58,6 @@ class Bullet {
     }
 
     needDestroy(enemy) {
-        console.log(this.isIntersection(enemy.elemRect))
         if (this.isIntersection(enemy.elemRect)) {
             enemy.attacked()
             return true
