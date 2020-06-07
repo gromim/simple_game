@@ -1,3 +1,5 @@
+import ws from '@/plugins/connect'
+
 class Game {
   // Класс игры
   // Тут основная логика игры
@@ -15,6 +17,7 @@ class Game {
   }
   keydown({key}) {
     if (this.keys[key]) this.keys[key].call(this.player)
+    console.log(ws)
   }
   keyup({key}) {
       if (this.keys[key]) this.player.stop()

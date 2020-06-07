@@ -21,11 +21,18 @@ class Rooms {
         this.games.splice(this.games.indexOf(game), 1)
     }
     join(user) {
+
+        // todo with find
+        let oldGame = null
         this.games.forEach(game => {
             if (game.addUser(user)) {
-                return
+                oldGame = game
             }
         })
+        if (oldGame) {
+            return oldGame
+        }
+        console.log('CREATE NEW GAME')
         let game = new Game()
         game.addUser(user)
         this.addGame(game)
@@ -39,11 +46,14 @@ class Game {
         this.max_user = 2
     }
     addUser(user) {
+
         if (this.users.length < this.max_user) {
             this.users.push(user)
             return true
+        } else {
+            return false
         }
-        return false
+        
     }
     removeUser(user) {
         let index = this.users.indexOf(user)
@@ -57,8 +67,11 @@ class Game {
         })
     }
     sendOther(main_user, data) {
+        console.log('SEND OTHER', data)
+        console.log(this.users)
         this.users.forEach(user => {
             if (user !== main_user) {
+                
                 user.send(data)
             }
         })
