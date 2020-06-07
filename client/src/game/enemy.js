@@ -38,10 +38,11 @@ class Enemy{
         this.hp -= 1
     }
     destroy() {
+        this.isDestroyed = true
         this.area.removeChild(this.elem)
     }
     needDestroy() {
-        return this.hp <= 0
+        return this.hp <= 0 && !this.isDestroyed
     }
 }
 export default Enemy
