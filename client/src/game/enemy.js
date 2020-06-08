@@ -2,16 +2,18 @@ class Enemy{
     // Класс врага
     // elem - ref из vue, чтобы взимодействовать отсюда
     constructor() {
+        const colors = ['#FFC107', '#03A9F4', '#FF5722', '#9E9E9E', '#673AB7']
         this.area = document.getElementById('game-area')
         this.elem = document.createElement('div')
-        this.hp = Math.round(5 - 0.5 + Math.random() * (20 - 5 + 1))
+        this.elem.style.background = `${colors[getRandom(0, colors.length-1)]}`
+        this.hp = getRandom(5, 20)
         this.elem.classList.add('enemy')
         this.area.appendChild(this.elem)
-
         this.areaRect = this.area.getBoundingClientRect()
         this.elemRect = this.elem.getBoundingClientRect()
         this.elem.style.left = this.areaRect.left + Math.floor(this.areaRect.width / 2) + 'px'
-
+        this.elem.style.left =
+            getRandom(0, parseInt(this.areaRect.width) - parseInt(this.elemRect.width)) + 'px'
         this.speed = 5
         this.direction = Math.random() > 0.5 ? 'right' : 'left'
     }
@@ -45,4 +47,7 @@ class Enemy{
         return this.hp <= 0 && !this.isDestroyed
     }
 }
+
+const getRandom = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1))
+
 export default Enemy

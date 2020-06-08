@@ -10,7 +10,7 @@ class Bullet {
         let sum = Math.abs(x) + Math.abs(y)
         
         // moves
-        this.speed = 8
+        this.speed = 16
         this.speed_x = x / sum * this.speed
         this.speed_y = y / sum * this.speed
 
