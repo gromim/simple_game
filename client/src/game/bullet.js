@@ -1,14 +1,14 @@
+import { getRandom } from '@/shared/utils'
+import { colors } from '@/shared/constants'
 class Bullet {
     // Класс пули
     // elem скорее всего не нужен будет, надо будет отсюда создавать и добавлять в дом новый элемент
     constructor(start_x, start_y, end_x, end_y) {
         this.area = document.getElementById('game-area')
-
         // offsets
         let x = end_x - start_x
         let y = end_y - start_y
         let sum = Math.abs(x) + Math.abs(y)
-        
         // moves
         this.speed = 16
         this.speed_x = x / sum * this.speed
@@ -19,6 +19,7 @@ class Bullet {
         this.elem.classList.add('bullet')
         this.elem.style.left = start_x - 5 + 'px'
         this.elem.style.top = start_y + 'px'
+        this.elem.style.background = `${colors[getRandom(0, colors.length)]}`
         this.area.appendChild(this.elem)
 
         this.areaRect = this.area.getBoundingClientRect()

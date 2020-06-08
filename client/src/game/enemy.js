@@ -1,11 +1,12 @@
-class Enemy{
+import { getRandom } from '@/shared/utils'
+import { colors } from '@/shared/constants'
+class Enemy {
     // Класс врага
     // elem - ref из vue, чтобы взимодействовать отсюда
     constructor() {
-        const colors = ['#FFC107', '#03A9F4', '#FF5722', '#9E9E9E', '#673AB7']
         this.area = document.getElementById('game-area')
         this.elem = document.createElement('div')
-        this.elem.style.background = `${colors[getRandom(0, colors.length-1)]}`
+        this.elem.style.background = `${colors[getRandom(0, colors.length)]}`
         this.hp = getRandom(5, 20)
         this.elem.classList.add('enemy')
         this.area.appendChild(this.elem)
@@ -47,7 +48,5 @@ class Enemy{
         return this.hp <= 0 && !this.isDestroyed
     }
 }
-
-const getRandom = (min, max) => Math.round(min - 0.5 + Math.random() * (max - min + 1))
 
 export default Enemy
